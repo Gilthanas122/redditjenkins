@@ -34,7 +34,7 @@ pipeline {
 
             post{
                 success{
-                    echo 'Deployment on the PRODUCTION is Successful'
+                    echo 'Deployment on the PRODUCTIONNew is Successful'
                 }
 
                 failure{
