@@ -3,43 +3,21 @@ pipeline {
     stages {
         stage ('Build Servlet Project') {
             steps {
-                  sh  './gradlew build'
+                  sh  'gradle bootJar'
             }
+        }
+        stage ('Test'){
+            steps{
 
-            post{
-                success{
-                    echo 'Now Archiving ....'
-
-                    archiveArtifacts artifacts : '**/*.war'
+                Step{
+                    input message: 'Approve tests??'
                 }
             }
         }
-
-        stage ('Deploy Build in Staging Area'){
-            steps{
-
-                build job : 'Rueppellii - Practice/pityu_deploy_pipeline'
-
-            }
-        }
-
-        stage ('Deploy to Production'){
-            steps{
-                timeout (time: 5, unit:'DAYS'){
-                    input message: 'Approve PRODUCTION Deployment?'
-                }
-
-                build job : 'Rueppellii - Practice/pityu-production-pipeline'
-            }
-
-            post{
-                success{
-                    echo 'Deployment on the PRODUCTIONNew is Successful'
-                }
-
-                failure{
-                    echo 'Deployement Failure on PRODUCTION'
-                }
+        stage ('Deploy'){
+        steps{
+            Step{
+                build job : 'Rueppellii - Practice/Pityu-Deploy'
             }
         }
     }
