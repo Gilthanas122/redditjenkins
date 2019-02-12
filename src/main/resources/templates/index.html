@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>Order your pizza</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<a th:href="@{/submit}"class="btn btn-warning">Add new post></a>
+
+<table class="table table-hover">
+    <tr th:each="post : ${posts}">
+        <td th:text="${post.likeCounter}"></td>
+        <td> <a th:href="@{|/incrementLikeCounter/${post.id}|}">+</a></td>
+        <td> <a th:href="@{|/decrementLikeCounter/${post.id}|}">-</a></td>
+        <td> <a th:text="${post.title}" th:href="@{|/${post.url}|}"> </a></td>
+        <td th:text="${post.getRedditUser().getName() != null} ? ${post.getRedditUser().getName()} : 'No assignee Yet'  "></td>
+        <td th:text="${post.date}"> </td>
+        <td> <a th:href="@{|/submit/${post.getId()}|}" th:text="Edit" class="btn btn-warning">  </a></td>
+    </tr>
+
+</table>
+
+</body>
+</html>
