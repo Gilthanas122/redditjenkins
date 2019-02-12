@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage ('Build Servlet Project') {
             steps {
-                  sh  './gradlew bootJar'
+                    ./gradlew bootJar
+                  sh 'make'
+                  archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
         stage ('Test'){
