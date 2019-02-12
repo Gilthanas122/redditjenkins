@@ -9,7 +9,7 @@ pipeline {
         stage ('Test'){
             steps{
 
-                Step{
+                step{
                     input message: 'Approve tests??'
                 }
             }
