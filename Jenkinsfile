@@ -19,7 +19,7 @@ pipeline {
                 }
         if (env.BRANCH_NAME == 'dev'){
             sh 'git merge'
-            echo 'Dev2 branch merged with master'
+            echo 'Dev2 branch merged with master?'
         }
          }
     }
