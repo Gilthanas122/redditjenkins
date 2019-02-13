@@ -15,7 +15,7 @@ pipeline {
         stage ('Deploy'){
         steps{
                 build job : 'Rueppellii - Practice/Pityu-Deploy'
-        }
+         }
     }
 }
 }
