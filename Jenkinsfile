@@ -4,7 +4,7 @@ pipeline {
         registry = "foxyfox/pityu-reddit"
         registryCredential = 'docker-technical-foxyfox'
         dockerImage = ''
-      }
+    }
     stages {
         stage('Build') {
             steps {
@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-               echo 'Running tests'
+                echo 'Running tests'
             }
         }
         stage('Deliver for development') {
@@ -33,27 +33,12 @@ pipeline {
                 branch 'master'
             }
             steps {
-                 sh './gradlew bootJar'
-                 sh 'docker build -t redditimage:$GIT_COMMIT .'
-                 sh 'sudo docker login'
-                 sh 'docker tag redditimage gilthanas122/reddit'
-                 sh 'docker push gilthanas122/reddit'
+                sh './gradlew bootJar'
+                sh 'docker build -t redditimage:$GIT_COMMIT .'
+                sh 'sudo docker login'
+                sh 'docker tag redditimage gilthanas122/reddit'
+                sh 'docker push gilthanas122/reddit'
             }
         }
     }
-    post {
-           // only triggered when blue or green sign
-           success {
-               slackSend
-           }
-           // triggered when red sign
-           failure {
-               slackSend
-           }
-           // trigger every-works
-           always {
-               slackSend
-           }
-        }
-    }
-
+}
