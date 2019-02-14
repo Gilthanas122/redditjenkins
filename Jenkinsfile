@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage ('Build Servlet Project') {
             steps {
-
             }
         }
         stage ('Test'){
