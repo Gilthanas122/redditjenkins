@@ -1,10 +1,7 @@
 pipeline {
     agent any
-    environment {
-        registry = "foxyfox/pityu-reddit"
-        registryCredential = 'docker-technical-foxyfox'
-        dockerImage = ''
-    }
+    withCredentials(
+            $class: 'UsernamePasswordMultiBinding', credentialsId: Dockerhub-technicaluser-for-Malachite usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS',)
     stages {
         stage('Build') {
             steps {
@@ -23,7 +20,7 @@ pipeline {
             steps {
                 sh './gradlew bootJar'
                 sh 'docker build -t redditimage:$GIT_COMMIT .'
-                sh 'sudo docker login'
+                sh 'sudo docker login -u $DOCKER_USER -p $DOCKER_PASS'
                 sh 'docker tag redditimage foxyfox/pityu-reddit'
                 sh 'docker push foxyfox/pityu-reddit'
             }
@@ -35,7 +32,7 @@ pipeline {
             steps {
                 sh './gradlew bootJar'
                 sh 'docker build -t redditimage:$GIT_COMMIT .'
-                sh 'sudo docker login'
+                sh 'sudo docker login -u $DOCKER_USER -p $DOCKER_PASS'
                 sh 'docker tag redditimage gilthanas122/reddit'
                 sh 'docker push gilthanas122/reddit'
             }
