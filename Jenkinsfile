@@ -22,7 +22,7 @@ pipeline {
             }
             steps {
                 sh './gradlew bootJar'
-                sh 'docker build -t redditimage:$GIT_COMMIT'
+                sh 'docker build -t redditimage:$GIT_COMMIT .'
                 sh 'sudo docker login'
                 sh 'docker tag redditimage foxyfox/pityu-reddit'
                 sh 'docker push foxyfox/pityu-reddit'
@@ -34,7 +34,7 @@ pipeline {
             }
             steps {
                  sh './gradlew bootJar'
-                 sh 'docker build -t redditimage:$GIT_COMMIT'
+                 sh 'docker build -t redditimage:$GIT_COMMIT .'
                  sh 'sudo docker login'
                  sh 'docker tag redditimage gilthanas122/reddit'
                  sh 'docker push gilthanas122/reddit'
