@@ -1,0 +1,12 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "gilthanas122/reddit:latest"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "8080",
+      "HostPort": "80"
+    }
+  ]
+}
