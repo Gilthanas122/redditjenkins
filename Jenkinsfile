@@ -25,4 +25,3 @@ pipeline {
     }
 }
 }
-g
