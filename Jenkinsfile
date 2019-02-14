@@ -42,7 +42,7 @@ pipeline {
         }
 
         stage ('Deploy Jenkins'){
-            step{
+            steps{
                 build job : 'Rueppellii - Practice/Pityu-Deploy'
 
             }
