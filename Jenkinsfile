@@ -1,20 +1,21 @@
 pipeline {
     agent any
-    stages{
-        stage('Init'){
-                         steps{
-                    sh 'gradle bootJar'
-        }
-        }
-        stage('Test'){
-            steps{
-            echo 'Testing'
+    stages {
+        stage('Example Build') {
+            steps {
+                echo 'Hello, Maven'
+                sh 'gradle bootJar'
             }
         }
-        stage ('Deploy'){
-            steps{
-                build job : 'Rueppellii - Practice/Pityu-Deploy'
+        stage('Example Test') {
+            steps {
+                echo 'Hello, JDK'
             }
         }
+         stage('Deploy') {
+                    steps {
+                    build job : 'Rueppellii - Practice/Pityu-Deploy'
+                    }
+                }
     }
 }
