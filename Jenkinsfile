@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_COMMON_CREDS = credentials('Dockerhub-technical-user-for-Malachite')
+    }
 
         stages {
             stage('Build') {
@@ -47,4 +48,3 @@ pipeline {
             }
         }
     }
-}
