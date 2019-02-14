@@ -22,5 +22,6 @@ pipeline {
             echo 'Dev2 branch merged with master'
                 }
             }
-        }
+}       }
     }
+ }
