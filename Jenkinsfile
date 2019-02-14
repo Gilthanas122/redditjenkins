@@ -4,7 +4,7 @@ pipeline {
         stage('Example Build') {
             steps {
                 echo 'Hello, Maven'
-                sh 'gradle bootJar'
+                sh './gradlew bootJar'
             }
         }
         stage('Example Test') {
