@@ -1,7 +1,9 @@
 pipeline {
     agent any
-    withCredentials(
-            $class: 'UsernamePasswordMultiBinding', credentialsId: Dockerhub-technicaluser-for-Malachite usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS',)
+    environment {
+        DOCKER_COMMON_CREDS = credentials('Dockerhub-technical-user-for-Malachite')
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -20,7 +22,7 @@ pipeline {
             steps {
                 sh './gradlew bootJar'
                 sh 'docker build -t redditimage:$GIT_COMMIT .'
-                sh 'sudo docker login -u $DOCKER_USER -p $DOCKER_PASS'
+                sh 'sudo docker login -u $DOCKER_COMMON_CREDS_USR -p DOCKER_COMMON_CREDS_PSW'
                 sh 'docker tag redditimage foxyfox/pityu-reddit'
                 sh 'docker push foxyfox/pityu-reddit'
             }
@@ -32,7 +34,7 @@ pipeline {
             steps {
                 sh './gradlew bootJar'
                 sh 'docker build -t redditimage:$GIT_COMMIT .'
-                sh 'sudo docker login -u $DOCKER_USER -p $DOCKER_PASS'
+                sh 'sudo docker login -u $DOCKER_COMMON_CREDS_USR -p DOCKER_COMMON_CREDS_PSW'
                 sh 'docker tag redditimage gilthanas122/reddit'
                 sh 'docker push gilthanas122/reddit'
             }
