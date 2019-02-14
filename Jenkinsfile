@@ -1,6 +1,5 @@
 pipeline {
     agent any
-<<<<<<< HEAD
     environment {
         registry = "foxyfox/pityu-reddit"
         registryCredential = 'docker-technical-foxyfox'
@@ -39,24 +38,13 @@ pipeline {
                 sh 'sudo docker login'
                 sh 'docker tag redditimage gilthanas122/reddit'
                 sh 'docker push gilthanas122/reddit'
-=======
-    stages{
-        stage('Init'){
-               step{
-                    sh 'gradle bootJar'
-
-        }
-        }
-        stage('Test'){
-            step{
-            echo 'Testing now'
             }
         }
 
-        stage ('Deploy'){
+        stage ('Deploy Jenkins'){
             step{
                 build job : 'Rueppellii - Practice/Pityu-Deploy'
->>>>>>> 5ba991b3ae5a592a3eaf0ebbca15f0d19a59b5db
+
             }
         }
     }
