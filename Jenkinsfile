@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ('Build Servlet Project') {
             steps {
-                  sh  'gradle bootJar'
+                  sh  'gradle bootJ nowar'
             }
         }
         stage ('Test'){
