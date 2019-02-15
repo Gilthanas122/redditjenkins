@@ -21,6 +21,7 @@ pipeline {
                 sh 'sudo docker login -u $DOCKER_COMMON_CREDS_USR -p $DOCKER_COMMON_CREDS_PSW'
                 sh 'docker tag redditimage:$GIT_COMMIT foxyfox/pityu-reddit'
                 sh 'docker push foxyfox/pityu-reddit'
+                sh 'docker push foxyfox/pityu-reddit:latest'
             }
         }
         stage('Deploy for production') {
@@ -33,6 +34,7 @@ pipeline {
                 sh 'sudo docker login -u $DOCKER_COMMON_CREDS_USR -p $DOCKER_COMMON_CREDS_PSW'
                 sh 'docker tag redditimage:$GIT_COMMIT foxyfox/pityu-reddit'
                 sh 'docker push foxyfox/pityu-reddit'
+                sh 'docker push foxyfox/pityu-reddit:latest'
                 build job: 'Rueppellii - Practice/Pityu-Deploy'
             }
         }
