@@ -57,7 +57,6 @@ pipeline {
         }
         // trigger every-works
         always {
-            cleanWs()
             slackSend(
                     channel: '#rueppellii-jenkins',
                     color: '#36A64F',
