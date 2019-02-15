@@ -4,11 +4,6 @@ pipeline {
         DOCKER_COMMON_CREDS = credentials('docker-technical-foxyfox')
     }
     stages {
-        stage('Build') {
-            steps {
-                sh './gradlew bootJar'
-            }
-        }
         stage('Test') {
             steps {
                 echo 'Running tests'
@@ -19,6 +14,7 @@ pipeline {
                 branch 'dev'
             }
             steps {
+                sh './gradlew bootJar'
                 sh 'docker build -t redditimage:$GIT_COMMIT .'
                 sh 'sudo docker login -u $DOCKER_COMMON_CREDS_USR -p $DOCKER_COMMON_CREDS_PSW'
                 sh 'docker tag redditimage:$GIT_COMMIT foxyfox/pityu-reddit'
@@ -31,6 +27,7 @@ pipeline {
                 branch 'master'
             }
             steps {
+                sh './gradlew bootJar'
                 sh 'docker build -t redditimage:$GIT_COMMIT .'
                 sh 'sudo docker login -u $DOCKER_COMMON_CREDS_USR -p $DOCKER_COMMON_CREDS_PSW'
                 sh 'docker tag redditimage:$GIT_COMMIT foxyfox/pityu-reddit'
