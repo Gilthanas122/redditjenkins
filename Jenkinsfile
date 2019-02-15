@@ -15,8 +15,8 @@ pipeline {
             }
         }
         stage('Deliver for development') {
-            when {
-                branch 'dev'
+            when not{
+                branch 'master'
             }
             steps {
                 sh 'docker build -t redditimage:$GIT_COMMIT .'
@@ -57,6 +57,7 @@ pipeline {
         }
         // trigger every-works
         always {
+            cleanWs()
             slackSend(
                     channel: '#rueppellii-jenkins',
                     color: '#36A64F',
