@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "gilthanas122/reddit:latest"
+    "Name": "foxyfox/pityu-reddit:latest"
   },
   "Ports": [
     {
