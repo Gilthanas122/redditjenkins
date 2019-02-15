@@ -1,9 +1,7 @@
 pipeline {
     agent any
     environment {
-        registry = "foxyfox/pityu-reddit"
-        registryCredential = 'docker-technical-foxyfox'
-        dockerImage = ''
+        DOCKER_COMMON_CREDS = credentials('docker-technical-foxyfox')
     }
     stages {
         stage('Build') {
@@ -21,10 +19,10 @@ pipeline {
                 branch 'dev'
             }
             steps {
-                sh './gradlew bootJar'
                 sh 'docker build -t redditimage:$GIT_COMMIT .'
-                sh 'sudo docker login'
-                sh 'docker tag redditimage foxyfox/pityu-reddit'
+                sh 'sudo docker login -u $DOCKER_COMMON_CREDS_USR -p $DOCKER_COMMON_CREDS_PSW'
+                sh 'docker tag redditimage:$GIT_COMMIT foxyfox/pityu-reddit'
+
                 sh 'docker push foxyfox/pityu-reddit'
             }
         }
@@ -33,11 +31,11 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh './gradlew bootJar'
                 sh 'docker build -t redditimage:$GIT_COMMIT .'
-                sh 'sudo docker login'
-                sh 'docker tag redditimage gilthanas122/reddit'
-                sh 'docker push gilthanas122/reddit'
+                sh 'sudo docker login -u $DOCKER_COMMON_CREDS_USR -p $DOCKER_COMMON_CREDS_PSW'
+                sh 'docker tag redditimage:$GIT_COMMIT foxyfox/pityu-reddit'
+                sh 'docker push foxyfox/pityu-reddit'
+                build job: 'Rueppellii - Practice/Pityu-Deploy'
             }
         }
     }
