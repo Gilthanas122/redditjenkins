@@ -41,15 +41,27 @@ pipeline {
     post {
         // only triggered when blue or green sign
         success {
-            slackSend (channel: '@rueppellii-jenkins', color: '#36A64F', message: "Job succeeded ")
+            slackSend(
+                    channel: '#rueppellii-jenkins',
+                    color: '#36A64F',
+                    message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was successful"
+            )
         }
         // triggered when red sign
         failure {
-            slackSend (channel: '@rueppellii-jenkins', color: '#36A64F', message: "Job failed ")
+            slackSend(
+                    channel: '#rueppellii-jenkins',
+                    color: '#36A64F',
+                    message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} failed "
+            )
         }
         // trigger every-works
         always {
-            slackSend (channel: '@rueppellii-jenkins', color: '#36A64F', message: "Job has been triggered")
+            slackSend(
+                    channel: '#rueppellii-jenkins',
+                    color: '#36A64F',
+                    message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} has been triggered"
+            )
         }
     }
 }
