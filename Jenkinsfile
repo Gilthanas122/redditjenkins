@@ -38,4 +38,18 @@ pipeline {
             }
         }
     }
+    post {
+        // only triggered when blue or green sign
+        success {
+            slackSend (channel: '@$rueppellii-jenkins', color: '#36A64F', message: "Job succeeded " + $GIT_COMMIT)
+        }
+        // triggered when red sign
+        failure {
+            slackSend (channel: '@$rueppellii-jenkins', color: '#36A64F', message: "Job failed " + $GIT_COMMIT)
+        }
+        // trigger every-works
+        always {
+            slackSend (channel: '@$rueppellii-jenkins', color: '#36A64F', message: "Job has been triggered")
+        }
+    }
 }
