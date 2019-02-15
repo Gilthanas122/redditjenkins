@@ -1,23 +1,24 @@
 pipeline {
     agent any
     stages {
-        stage ('Build Servlet Project') {
+        stage('Build Servlet Project') {
             steps {
-                  sh  'gradle bootJ nowar'
+                sh 'gradle bootJ nowar'
             }
         }
-        stage ('Test'){
-            steps{
+        stage('Test') {
+            steps {
 
-                Step{
+                Step {
                     input message: 'Approve tests??'
                 }
             }
         }
-        stage ('Deploy'){
-        steps{
-            Step{
-                build job : 'Rueppellii - Practice/Pityu-Deploy'
+        stage('Deploy') {
+            steps {
+                Step {
+                    build job: 'Rueppellii - Practice/Pityu-Deploy'
+                }
             }
         }
     }
