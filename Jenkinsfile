@@ -10,8 +10,8 @@ pipeline {
             }
         }
         stage('Deliver for development') {
-            when {
-                branch 'dev'
+            when not {
+                branch 'master'
             }
             steps {
                 sh './gradlew bootJar'
